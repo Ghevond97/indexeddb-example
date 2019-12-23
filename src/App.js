@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Dexie from 'dexie';
+import Form from './Form';
 
-function App() {
+const App = () => {
+  const [open, setOpen] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ margin: '2rem auto', width: '200px' }}>
+      <button onClick={() => setOpen(!open)}>
+        {`${open ? 'close' : 'open'}`}
+      </button>
+      {open && <Form db={new Dexie('FormDatabase')} />}
     </div>
   );
-}
+};
 
 export default App;
